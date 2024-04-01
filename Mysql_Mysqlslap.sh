@@ -12,9 +12,9 @@ MAX_CONNECTIONS=$((THREADS + (THREADS * 20 / 100)))
 
 # Изменяем конфигурационный файл MySQL
 cd /etc/mysql/mysql.conf.d/
-sed -i -e "/^bind-address/s/[= ][^\t#]*/ = '127.0.0.1'/" mysqld.cnf
-sed -i -e "/^mysqlx-bind-address/s/[= ][^\t#]*/ = '127.0.0.1'/" mysqld.cnf
-sed -i -e "/^max_connections/s/[= ][^\t#]*/ = '$MAX_CONNECTIONS'/" mysqld.cnf
+sed -i -e "/^#*\s*bind-address/s/^#*\s*[= ][^\t#]*/bind-address = '127.0.0.1'/" mysqld.cnf
+sed -i -e "/^#*\s*mysqlx-bind-address/s/^#*\s*[= ][^\t#]*/mysqlx-bind-address = '127.0.0.1'/" mysqld.cnf
+sed -i -e "/^#*\s*max_connections/s/^#*\s*[= ][^\t#]*/max_connections = '$MAX_CONNECTIONS'/" mysqld.cnf
 service mysql restart
 
 # Создаем базу данных "test" и пользователя "admin" с установленным паролем
